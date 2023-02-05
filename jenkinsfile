@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages{
+        stage("Clonar repositório"){
+             step{
+                git blanch: 'main', 'url', 'https://github.com/raphaelpcarlos/cypress-exer-modulo-15.git'
+            }
+        }
+       stage('Instalar as depencias'){
+        step{
+            sh 'npm install'
+        }
+        stage('Teste de login'){
+            step{
+                sh 'npm run cy:login'
+            }
+        }
+          stage('Teste produtos'){
+            step{
+                sh 'npm run cy:produtos'
+            }
+        }
+       }
+    }
+}
